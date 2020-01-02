@@ -42,9 +42,6 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
         style: TextStyle(fontSize: 30),
       ),
       actions: <Widget>[
-        // Text(waktuSekarang)
-        // ,
-
         RaisedButton(
           color: Colors.red,
           child: Text(
@@ -81,6 +78,11 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     tabController = TabController(vsync: this, length: 4, initialIndex: 0);
+    tabController.addListener(_handleTabIndex);
+  }
+
+  void _handleTabIndex() {
+    setState(() {});
   }
 
   @override
@@ -146,11 +148,59 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
         ],
       ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: Icon(Icons.send),
-      ), //
+      floatingActionButton: _bottomButtons()
+
+      //  FloatingActionButton(
+      //   onPressed: () {},
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.send),
+      // )
+      , //
     );
+  }
+
+  Widget _bottomButtons() {
+    var fButon;
+    if (tabController.index == 0) {
+      fButon = FloatingActionButton(
+          shape: StadiumBorder(),
+          onPressed: null,
+          backgroundColor: Colors.red,
+          child: Icon(
+            Icons.save,
+            size: 20.0,
+          ));
+    } else if (tabController.index == 1) {
+      fButon = Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: FloatingActionButton(
+            shape: StadiumBorder(),
+            onPressed: null,
+            backgroundColor: Colors.green,
+            child: Icon(
+              Icons.message,
+              size: 20.0,
+            )),
+      );
+    } else if (tabController.index == 2) {
+      fButon = FloatingActionButton(
+          shape: StadiumBorder(),
+          onPressed: null,
+          backgroundColor: Colors.blue,
+          child: Icon(
+            Icons.edit,
+            size: 20.0,
+          ));
+    } else if (tabController.index == 3) {
+      fButon = FloatingActionButton(
+          shape: StadiumBorder(),
+          onPressed: null,
+          backgroundColor: Colors.yellow,
+          child: Icon(
+            Icons.send,
+            size: 20.0,
+          ));
+    }
+    return fButon;
   }
 }
